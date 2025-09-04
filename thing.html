@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LED Circuit Animation</title>
+    <!-- Using a formal font (Times New Roman) -->
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            position: relative; /* Ensures footer stays at the bottom */
+        }
+
+        /* Box for the LEDs */
+        .led-container-wrapper {
+            background: rgba(0, 0, 0, 0.7); /* Transparent dark gray background */
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .led {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: gray;
+            transition: background-color 0.3s;
+        }
+
+        .on {
+            background-color: red;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #fdbb2d;
+            text-align: center;
+        }
+
+        /* Shimmering effect for the footer */
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            right: 20px;
+            font-size: 20px;
+            color: #fff;
+            font-family: 'Times New Roman', serif; /* Formal font */
+            animation: shimmer 2s infinite alternate;
+        }
+
+        /* Shimmering effect for the footer text */
+        @keyframes shimmer {
+            0% {
+                text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00, 0 0 15px #ffcc00;
+            }
+            50% {
+                text-shadow: 0 0 20px #ffcc00, 0 0 30px #ffcc00, 0 0 40px #ffcc00;
+            }
+            100% {
+                text-shadow: 0 0 5px #ffcc00, 0 0 10px #ffcc00, 0 0 15px #ffcc00;
+            }
+        }
+
+        /* Explanation section */
+        .explanation {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            line-height: 1.6;
+            max-width: 800px;
+        }
+
+        .explanation h3 {
+            color: #ffcc00;
+            text-align: center;
+        }
+
+        .explanation ol {
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Box for LEDs -->
+    <div class="led-container-wrapper">
+        <div id="led1" class="led"></div>
+        <div id="led2" class="led"></div>
+    </div>
+
+    <!-- Explanation of the Circuit -->
+    <div class="explanation">
+        <h3>How the Circuit Works:</h3>
+        <p>This is a simple simulation of an astable multivibrator circuit with two LEDs. Here's how the circuit works:</p>
+        <ol>
+            <li><strong>Power Supply:</strong> The circuit is powered by a voltage source that applies a voltage to the circuit components.</li>
+            <li><strong>Resistors and Capacitors:</strong> The resistors (R1, R2) and capacitors (C1, C2) are responsible for charging and discharging. When power is applied, the capacitors start charging through the resistors.</li>
+            <li><strong>Transistor Switching:</strong> The capacitors charge and discharge, which triggers the transistors (T1, T2). The transistors act as switches that control the LEDs.</li>
+            <li><strong>LED Blinking:</strong> When a transistor turns on, it allows current to flow through the corresponding LED, turning it on. The other LED is turned off as its transistor is in the off state.</li>
+            <li><strong>Cycle Repeats:</strong> As one capacitor fully charges, it switches the corresponding transistor, turning one LED on while turning the other off. The cycle then repeats, causing the LEDs to blink alternately.</li>
+        </ol>
+    </div>
+
+    <!-- Custom Message Section -->
+    <div class="message">
+        <p>Hey Vinul, Thurusha, and everyone! This is how the two LEDs in our circuit work.</p>
+    </div>
+
+    <!-- Footer with shimmering effect -->
+    <div class="footer">
+        <p>Made by Imeth Wimalaweera</p>
+    </div>
+
+    <script>
+        // Initial states for the LEDs
+        let led1State = false; // LED1 starts off
+        let led2State = true;  // LED2 starts on
+
+        // LED elements
+        const led1 = document.getElementById("led1");
+        const led2 = document.getElementById("led2");
+
+        // Function to toggle the LED states alternatively
+        function toggleLEDs() {
+            led1State = !led1State;
+            led2State = !led2State;
+
+            // Update LED1 state
+            if (led1State) {
+                led1.classList.add("on");
+            } else {
+                led1.classList.remove("on");
+            }
+
+            // Update LED2 state
+            if (led2State) {
+                led2.classList.add("on");
+            } else {
+                led2.classList.remove("on");
+            }
+        }
+
+        // Toggle the LEDs every 1000 milliseconds (1 second)
+        setInterval(toggleLEDs, 1000);  // Update every 1 second
+    </script>
+</body>
+</html>
